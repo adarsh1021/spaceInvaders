@@ -2,7 +2,7 @@ class MyShip {
   constructor() {
     this.x = width / 2;
     this.y = height / 2;
-    this.shipWidth = 26;
+    this.shipWidth = 30;
     this.shipHeight = 8;
     this.cannonWidth = 5;
     this.direction = "none";
@@ -49,6 +49,11 @@ class MyShip {
       if (this.direction === "right" && this.x < width - this.shipWidth / 2) {
         this.x += 5;
       }
+    }
+  }
+
+  moveTo() {
+    if (!pauseMode) {
     }
   }
 
