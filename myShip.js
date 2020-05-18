@@ -52,8 +52,9 @@ class MyShip {
     }
   }
 
-  moveTo() {
+  moveTo(x) {
     if (!pauseMode) {
+      this.x = x;
     }
   }
 
