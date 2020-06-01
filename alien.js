@@ -63,3 +63,37 @@ class Alien {
     pop();
   }
 }
+
+class AlienHandler {
+  // aliens = [];
+  constructor(startingX, startingY, alienConfig) {
+    /*
+      startingX: the starting x position for aliens
+      startingY: the starting y position for aliens
+      alienConfig: list of dicts that contain the type and number of aliens in each row
+    */
+    // Creates all aliens according to alienConfig
+    let rowStartX = startingX;
+    alienConfig.forEach(function (alienRow) {
+      for (let i = 0; i < alienRow.count; i++) {
+        rowStartX = startingX;
+        // Create aliens in this row
+        for (i = 0; i < 10; i++) {
+          aliens.push(
+            new Alien(
+              rowStartX,
+              startingY,
+              alienRow.width,
+              alienRow.height,
+              alienRow.alienType_a,
+              alienRow.alienType_b,
+              10
+            )
+          );
+          rowStartX += 40;
+        }
+        startingY -= 30;
+      }
+    });
+  }
+}
