@@ -15,7 +15,6 @@ class Alien {
   draw() {
     if (this.alive) {
       // only draws alien if it is alive
-
       if (this.currentImage === "A") {
         image(this.imageA, this.x, this.y, this.alienWidth, this.alienHeight);
       }
@@ -31,11 +30,11 @@ class Alien {
     }
   }
 
-  moveHorizontal() {
-    if (alienDirection === "left") {
+  moveHorizontal(direction) {
+    if (direction === "left") {
       this.x -= 5;
     }
-    if (alienDirection === "right") {
+    if (direction === "right") {
       this.x += 5;
     }
     if (this.currentImage === "A") {
@@ -66,6 +65,9 @@ class Alien {
 
 class AlienHandler {
   // aliens = [];
+
+  direction = "left";
+
   constructor(startingX, startingY, alienConfig) {
     /*
       startingX: the starting x position for aliens
@@ -95,5 +97,49 @@ class AlienHandler {
         startingY -= 30;
       }
     });
+  }
+
+  draw() {
+    for (let alien of aliens) {
+      alien.draw();
+    }
+  }
+
+  move() {
+    for (let alien of aliens) {
+      alien.moveHorizontal(this.direction);
+    }
+    if (this.checkIfAliensReachedEdge()) {
+      this.reverseDirection();
+      this.moveAllDown();
+    }
+  }
+
+  checkIfAliensReachedEdge() {
+    let edgeReached = false;
+    for (let alien of aliens) {
+      if (
+        (alien.x < 30 && alien.alive) ||
+        (alien.x > width - 30 && alien.alive)
+      ) {
+        edgeReached = true;
+        break;
+      }
+    }
+    return edgeReached;
+  }
+
+  reverseDirection() {
+    if (this.direction === "left") {
+      this.direction = "right";
+    } else {
+      this.direction = "left";
+    }
+  }
+
+  moveAllDown() {
+    for (let alien of aliens) {
+      alien.moveVertical();
+    }
   }
 }

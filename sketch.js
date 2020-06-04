@@ -1,8 +1,5 @@
 function draw() {
   background(bgColor);
-  //   rect(width / 2, 0, width, 10);
-  //   rect(0, height / 2, 10, height);
-  //   rect(width, height / 2, 10, height);
 
   player.move();
   player.drawPlayer();
@@ -16,21 +13,19 @@ function draw() {
     // moveRedLaser();
     // events that only occur based on the current speed, not every frame
     if (frameCount % speed == 0) {
-      moveAllAliens();
+      alienHandler.move();
       fireLaser();
     }
-    // moveRedAlien();
   }
   if (pauseMode) {
     animateNewLife();
   }
   drawAllShots();
   drawAllLasers();
-  drawAllAliens();
-  //   drawRedAlien();
+  alienHandler.draw();
+
   hitAlien();
   hitPlayer();
-  //   hitRedAlien();
   if (allAliensKilled()) {
     print("all aliens killed!");
     resetAliens();
@@ -115,51 +110,6 @@ function drawAllShots() {
 function moveAllShots() {
   for (let shot of shots) {
     shot.move();
-  }
-}
-
-function drawAllAliens() {
-  for (let alien of aliens) {
-    alien.draw();
-  }
-}
-
-// moves all aliens
-function moveAllAliens() {
-  for (let alien of aliens) {
-    alien.moveHorizontal(alienDirection);
-  }
-  if (checkIfAliensReachedEdge()) {
-    reverseAlienDirections();
-    moveAllAliensDown();
-  }
-}
-
-function checkIfAliensReachedEdge() {
-  let edgeReached = false;
-  for (let alien of aliens) {
-    if (
-      (alien.x < 30 && alien.alive) ||
-      (alien.x > width - 30 && alien.alive)
-    ) {
-      edgeReached = true;
-    }
-  }
-  return edgeReached;
-}
-
-// reverse horizontal travel direction of all(most all) aliens & moves them down
-function reverseAlienDirections() {
-  if (alienDirection === "left") {
-    alienDirection = "right";
-  } else {
-    alienDirection = "left";
-  }
-}
-
-function moveAllAliensDown() {
-  for (let alien of aliens) {
-    alien.moveVertical();
   }
 }
 
