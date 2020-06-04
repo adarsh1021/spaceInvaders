@@ -10,8 +10,6 @@ function draw() {
     // run the functions that incrimentally move everything
     moveAllShots();
     moveAllLasers();
-    // moveRedLaser();
-    // events that only occur based on the current speed, not every frame
     if (frameCount % speed == 0) {
       alienHandler.move();
       fireLaser();
@@ -210,24 +208,6 @@ function hitPlayer() {
     let rightEdgeOfShip = player.x + player.shipWidth / 2;
     let frontOfShip = player.y - player.shipHeight / 2;
     let backOfShip = player.y + player.shipHeight / 2;
-
-    // below shapes used for figuring out and debigging of laser/ship overlap detection
-    //     noFill();
-    //     stroke(255, 0, 0);
-    //     strokeWeight(1);
-    //     beginShape();
-    //     vertex(leftEdgeOfLaser, backOfLaser);
-    //     vertex(leftEdgeOfLaser, frontOfLaser);
-    //     vertex(rightEdgeOfLaser, frontOfLaser);
-    //     vertex(rightEdgeOfLaser, backOfLaser);
-    //     endShape(CLOSE);
-
-    //     beginShape();
-    //     vertex(leftEdgeOfShip, backOfShip);
-    //     vertex(leftEdgeOfShip, frontOfShip);
-    //     vertex(rightEdgeOfShip, frontOfShip);
-    //     vertex(rightEdgeOfShip, backOfShip);
-    //     endShape(CLOSE);
 
     // if the player has been shot...
     if (
